@@ -1,0 +1,574 @@
+/* --- Global Resets & Defaults --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth; /* For smooth anchor links */
+}
+
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fff;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* text-align: center; */ /* CAUTION: Applying this to body will center ALL text by default.
+                                 Usually better to apply text-align: center to specific containers. */
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: #f46455;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+p {
+    margin-bottom: 1.2em;
+    color: #555;
+    /* text-align: center; */ /* CAUTION: Centers ALL paragraph text. Apply to specific containers. */
+}
+
+a:hover {
+    color: #d35445; /* Darker shade of theme red */
+    text-decoration: none; /* Usually prefer no underline on hover for modern look */
+}
+
+.container {
+    width: 90%;
+    max-width: 1170px;
+    margin: 0 auto; /* This already centers the .container itself */
+    padding-left: 15px;
+    padding-right: 15px;
+    /* text-align: left; */ /* Default text alignment for content within containers, override below if needed */
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.col-md-3, .col-md-12, .col-sm-6 {
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+    margin-bottom: 20px; /* Default bottom margin for columns */
+}
+
+@media (min-width: 768px) {
+    .col-sm-6 {  width: 50%; }
+}
+
+@media (min-width: 992px) {
+    .col-md-3 { width: 25%; }
+    .col-md-12 { width: 100%; }
+}
+
+.screen-reader-text {
+    border: 0; clip: rect(1px, 1px, 1px, 1px); clip-path: inset(50%);
+    height: 1px; margin: -1px; overflow: hidden; padding: 0;
+    position: absolute !important; width: 1px; word-wrap: normal !important;
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Raleway', sans-serif;
+    margin-bottom: 0.75em;
+    line-height: 1.3;
+    font-weight: 600;
+    color: #2c3e50;
+    /* text-align: center; */ /* Apply globally if ALL headings should be centered */
+}
+
+h1 { font-size: 2.8em; }
+h2 { font-size: 2.2em; }
+h3 { font-size: 1.8em; }
+p { margin-bottom: 1.2em; color: #555; }
+
+/* --- Buttons --- */
+.btn, input[type="submit"], button {
+    display: inline-block;
+    background-color: #f46455;
+    color: white !important; /* Ensure text is white */
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+}
+.btn:hover, input[type="submit"]:hover, button:hover {
+    background-color: #d35445;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.ow-button-base a, /* SiteOrigin button */
+.sow-hero-buttons .ow-button-base a { /* Hero Button */
+    background-color: transparent; /* Let specific button styles take over or set here */
+    border: 2px solid #f46455;
+    color: #f46455 !important;
+    padding: 10px 22px;
+}
+.ow-button-base a:hover,
+.sow-hero-buttons .ow-button-base a:hover {
+    background-color: #f46455;
+    color: white !important;
+}
+
+
+/* --- Header & Navigation --- */
+#masthead {
+    background-color: #fff;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 15px 0;
+    position: sticky; /* Sticky header */
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+#masthead .nav-bar { display: flex; justify-content: space-between; align-items: center; }
+.site-title-container .custom-logo-link img { max-height: 50px; }
+
+.mobile-toggle {
+    display: none;
+    font-size: 1.8em;
+    cursor: pointer;
+    color: #333;
+    padding: 5px;
+}
+.mobile-toggle:hover { color: #f46455; }
+
+/* Mega Menu */
+#mega-menu-wrap-primary { display: flex; align-items: center; }
+#mega-menu-primary { list-style: none; display: flex; }
+#mega-menu-primary .mega-menu-item { position: relative; }
+#mega-menu-primary .mega-menu-link {
+    padding: 15px 18px; display: block; color: #444;
+    text-transform: uppercase; font-weight: 600; font-size: 0.85em;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+#mega-menu-primary .mega-menu-link:hover,
+#mega-menu-primary .mega-menu-item.mega-current-menu-item > .mega-menu-link,
+#mega-menu-primary .mega-menu-item:hover > .mega-menu-link { /* Highlight on hover for parent */
+    color: #f46455;
+    background-color: #f9f9f9;
+}
+
+#mega-menu-primary .mega-sub-menu {
+    display: none; position: absolute; left: 0; top: 100%;
+    background-color: #fff; border: 1px solid #f0f0f0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    z-index: 1001; min-width: 220px;
+    opacity: 0; visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+#mega-menu-primary .mega-menu-item:hover > .mega-sub-menu { /* JS will handle this better, but CSS fallback */
+    display: block; opacity: 1; visibility: visible; transform: translateY(0);
+}
+#mega-menu-primary .mega-sub-menu .mega-menu-link {
+    padding: 10px 18px; font-size: 0.8em; text-transform: none;
+    border-bottom: 1px solid #f7f7f7;
+}
+#mega-menu-primary .mega-sub-menu .mega-menu-link:last-child { border-bottom: none; }
+#mega-menu-primary .mega-menu-section-heading {
+    font-weight: bold; padding: 12px 18px; color: #333;
+    font-size: 0.85em; border-bottom: 1px solid #eee; background-color: #fcfcfc;
+}
+#mega-menu-primary .mega-indicator { margin-left: 5px; } /* Style the dropdown arrow */
+
+.search-widget-handle { position: relative; }
+.search-widget-handle .search { cursor: pointer; padding: 15px; color: #555; }
+.search-widget-handle .search:hover { color: #f46455; }
+.search-widget-handle .function {
+    display: none; position: absolute; right: 0; top: calc(100% + 5px);
+    background: #fff; padding: 15px; border: 1px solid #f0f0f0; z-index: 1002;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1); border-radius: 4px;
+}
+.search-form { display: flex; }
+.search-form input[type="text"] {
+    padding: 10px; border: 1px solid #ccc; border-radius: 3px 0 0 3px;
+    min-width: 200px;
+}
+.search-form button { border-radius: 0 3px 3px 0; padding: 10px 12px;}
+
+
+/* --- Main Content Area --- */
+.main-container { padding-top: 30px;
+    padding-bottom: 30px; }
+.content-area { padding-top: 0; }
+article.post-content { margin-bottom: 40px; }
+article.post-content .entry-header.nolist { display: none; }
+.post-title { margin-bottom: 10px; }
+.post-title a { color: #2c3e50; }
+.post-title a:hover { color: #f46455; }
+.entry-meta { font-size: 0.85em; color: #777; margin-bottom: 25px; }
+.entry-meta ul { list-style: none; padding: 0; display: flex; }
+.entry-meta ul li { margin-right: 18px; }
+.entry-meta ul li:last-child { margin-right: 0; }
+
+/* SiteOrigin Panels */
+.panel-layout { margin-bottom: 30px; }
+.panel-row-style { padding-top: 40px; padding-bottom: 40px; }
+.panel-grid-cell { margin-bottom: 25px; }
+.siteorigin-widget-tinymce p:last-child { margin-bottom: 0; }
+
+#pg-1668-2 .siteorigin-widget-tinymce {
+    text-align: center; /* This will center the h1 and p inside */
+}
+
+#pg-1668-4 .siteorigin-widget-tinymce {
+    text-align: center;
+}
+
+#pg-1668-5 .siteorigin-widget-tinymce {
+    text-align: center;
+}
+
+/* Hero Sections (SOW Hero Widget) */
+.so-widget-sow-hero {
+     position: relative; color: #fff; text-align: center;
+ }
+
+.small-hero-h, .small-hero-p {
+    text-align: center; /* Already implicitly by parent, but explicit for clarity */
+}
+
+.sow-slider-base { display: block !important; position: relative; }
+.sow-slider-image {
+    min-height: 450px; background-size: cover; background-position: center center;
+    display: flex; align-items: center; justify-content: center; padding: 50px 20px;
+    position: relative;
+}
+.sow-slider-image::before { /* Overlay for better text contrast */
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.3); z-index: 1;
+}
+.sow-slider-image-overlay { /* If image is used as overlay */
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background-size: cover; background-position: center; z-index: 0; /* Behind text overlay */
+}
+.sow-slider-image-container { position: relative; z-index: 2; }
+.front-page-heading {
+    font-size: 3em; font-weight: 700; margin-bottom: 0.4em; color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+.front-page-heading-tagline {
+    font-size: 1.6em; margin-bottom: 1.8em; color: #f0f0f0;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+.small-hero-h { font-size: 1.8em; color: #fff; margin-bottom: 0.5em; }
+.small-hero-p { font-size: 1.1em; color: #eee; }
+
+.panel-widget-style h1, .panel-widget-style h2, .panel-widget-style h3,
+.so-widget-sow-editor h1, .so-widget-sow-editor h2, .so-widget-sow-editor h3 {
+    text-align: center;
+}
+
+
+/* Smart Slider - Placeholder, as its JS handles most styling */
+.n2-section-smartslider {
+    margin-bottom: 40px; background-color: #f0f0f0; min-height: 350px;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    border: 1px solid #ddd; border-radius: 4px; overflow: hidden;
+}
+.n2-ss-slide-background img { width: 100%; height: 100%; object-fit: cover; }
+/* Arrows for Smart Slider (matching bxSlider style) */
+.nextend-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background-color: rgba(20, 20, 20, 0.4); color: white;
+    width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 10; border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+.nextend-arrow:hover { background-color: #f46455; }
+.nextend-arrow img { max-width: 18px; height: auto; } /* If using img for arrows */
+#n2-ss-6-arrow-previous { left: 20px; }
+#n2-ss-6-arrow-next { right: 20px; }
+.nextend-shadow img { margin-top: -1px; /* Adjust shadow position */ }
+
+
+/* GS Logo Slider (Option 2: Modern Cards - selected for attractiveness) */
+.gs_logo_area.slider1 {
+    background-color: #f8f9fa; /* Light gray, almost white */
+    text-align: center;
+    padding: 60px 0;
+    border-top: 1px solid #e9ecef;
+    border-bottom: 1px solid #e9ecef;
+}
+.gs_logo_area h2.section-title { /* Assuming you add this title inside */
+    text-align: center; margin-bottom: 15px; color: #2c3e50;
+    font-weight: 700; font-size: 2.2em;
+}
+.gs_logo_area p.section-subtitle { /* For "We only work with the best..." */
+    text-align: center; margin-bottom: 40px; color: #6c757d; font-size: 1.1em;
+}
+.gs_logo_area .gs_logo_container {
+    display: flex; flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch; gap: 25px;
+}
+.gs_logo_area .gs_logo_single {
+    background-color: #ffffff; padding: 25px; border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+    text-align: center; flex: 0 1 170px;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.gs_logo_area .gs_logo_single:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+.gs_logo_area .gs_logo_single img {
+    max-height: 55px; width: auto; margin: 0 auto;
+    filter: grayscale(100%); opacity: 0.65;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+}
+.gs_logo_area .gs_logo_single:hover img { filter: grayscale(0%); opacity: 1; }
+
+/* bxSlider Controls (Attractive Styling from previous answer) */
+.bx-wrapper {
+    position: relative;
+    margin-bottom: 30px; /* Space for pager if external */
+    box-shadow: none; /* Remove default wrapper shadow if any */
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+.bx-wrapper .bx-controls-auto,
+.bx-wrapper .bx-pager,
+.bx-wrapper .bx-controls-direction {
+    position: absolute; width: 100%;
+}
+.bx-wrapper .bx-controls-direction a {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 99;
+    width: 44px; height: 44px; background-color: rgba(20, 20, 20, 0.4);
+    color: #fff; text-indent: -9999px; border-radius: 50%;
+    transition: background-color 0.3s ease, opacity 0.3s ease; opacity: 0.7;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.bx-wrapper .bx-controls-direction a:hover { background-color: #f46455; opacity: 1; }
+.bx-wrapper .bx-prev { left: 15px; }
+.bx-wrapper .bx-next { right: 15px; }
+.bx-wrapper .bx-controls-direction a::before {
+    font-family: "Font Awesome 5 Free"; font-weight: 900;
+    display: inline-block; text-indent: 0; font-size: 18px; line-height: 1;
+}
+.bx-wrapper .bx-prev::before { content: "\\f053"; }
+.bx-wrapper .bx-next::before { content: "\\f054"; }
+
+.bx-wrapper .bx-pager {
+    text-align: center; font-size: .85em; padding-top: 15px; /* If external */
+    bottom: 15px; /* If overlaid */
+    z-index: 99;
+}
+.bx-wrapper .bx-pager.bx-default-pager a {
+    background: #ccc; text-indent: -9999px; display: block;
+    width: 12px; height: 12px; margin: 0 6px; outline: 0; border-radius: 50%;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    transform: scale(0.8);
+}
+.bx-wrapper .bx-pager.bx-default-pager a:hover,
+.bx-wrapper .bx-pager.bx-default-pager a.active {
+    background: #f46455; transform: scale(1);
+    box-shadow: 0 0 0 3px rgba(244, 100, 85, 0.3);
+}
+.bx-wrapper .bx-pager.bx-default-pager a.active { transform: scale(1.1); }
+
+
+/* Video Background Section */
+.video-row .sow-slider-image {
+    position: relative; overflow: hidden; min-height: 450px;
+}
+.video-row video.sow-background-element {
+    position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%;
+    width: auto; height: auto; z-index: 0; transform: translateX(-50%) translateY(-50%);
+}
+.footer-cta {
+    position: relative; z-index: 1; 
+    color: #fff; 
+    text-align: center;
+    background-color: rgba(0,0,0,0.4); 
+    padding: 30px; border-radius: 5px;
+}
+.footer-cta h3 { font-size: 2.2em; margin-bottom: 0.5em; }
+.footer-cta p { font-size: 1.2em; margin-bottom: 0; }
+
+/* --- Footer Callout --- */
+.footer-mega-col-wrap .widget_custom_html { /* This is the "Get a Free Quote" bar */
+    background-color: #f46455; 
+    text-align: center; 
+    padding: 35px 20px;
+}
+#footer_quote_button {
+    display: inline-block; padding: 16px 35px; border: solid 2px white;
+    color: white; border-radius: 5px; font-weight: bold; text-transform: uppercase;
+    font-size: 1em; transition: background-color 0.3s ease, color 0.3s ease;
+}
+#footer_quote_button:hover { background-color: white; color: #f46455; }
+
+/* --- Footer --- */
+#colophon {
+    background-color: #222529; /* Slightly more modern dark */
+    color: #adb5bd; /* Lighter gray for better readability */
+    padding: 50px 0 20px; font-size: 0.9em;
+}
+
+.footer-widget-area { 
+    display: flex; 
+    flex-wrap: wrap;
+    margin-bottom: 30px; 
+}
+
+.footer-widget { margin-bottom: 30px; }
+.footer-widget .widget-title {
+    color: #fff; font-size: 1.25em; margin-bottom: 20px;
+    border-bottom: 1px solid #495057; padding-bottom: 12px; font-weight: 600;
+}
+.footer-widget .widget-title i { margin-right: 10px; color: #f46455; }
+.footer-widget {
+    margin-bottom: 30px;
+    /* text-align: center; */ /* Uncomment to center content of ALL footer widgets */
+}
+
+/* Footer Social Icons */
+.cnss-social-icon { list-style: none; padding-left: 0; }
+.cnss-social-icon li { display: inline-block; margin-right: 8px; }
+.cnss-social-icon li a {
+    display: flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px;
+    color: #f46455 !important; border: 2px solid #495057;
+    border-radius: 50%; font-size: 18px; /* Icon size */
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+.cnss-social-icon li a:hover {
+    background-color: #f46455; border-color: #f46455; color: white !important;
+}
+
+/* Footer Newsletter Form */
+.mc4wp-form label { display: block; margin-bottom: 6px; color: #ced4da; font-weight: 400; }
+.mc4wp-form input[type="text"],
+.mc4wp-form input[type="email"] {
+    width: 100%; padding: 12px; margin-bottom: 12px;
+    background: #343a40; border: 1px solid #495057;
+    color: #fff; border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+.mc4wp-form input[type="text"]:focus,
+.mc4wp-form input[type="email"]:focus { border-color: #f46455; outline: none; }
+.mc4wp-form input[type="submit"] {
+    /* Uses global button style, but can override */
+    width: 100%; /* Full width subscribe button */
+}
+.mc4wp-form p { color: #adb5bd; font-size: 0.9em; }
+.mc4wp-form p a { color: #ced4da; }
+.mc4wp-form p a:hover { color: #f46455; }
+
+/* Footer Company Menu */
+.widget_nav_menu ul { list-style: none; padding-left: 0; }
+.widget_nav_menu ul li a { color: #adb5bd; padding: 6px 0; display: block; }
+.widget_nav_menu ul li a:hover { color: #fff; padding-left: 5px; } /* Indent on hover */
+
+.site-info {
+    padding-top: 25px; border-top: 1px solid #343a40;
+    text-align: center; /* Center copyright */
+    color: #868e96;
+}
+@media (min-width: 768px) {
+    .site-info { text-align: left; } /* Align left on larger screens */
+}
+.site-info .copyright-text { font-size: 0.85em; }
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed; bottom: -60px; /* Initially hidden */ right: 25px;
+    background-color: #f46455; color: white !important;
+    width: 45px; height: 45px; text-align: center; line-height: 45px;
+    border-radius: 50%; z-index: 999; font-size: 1.2em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: bottom 0.4s ease, background-color 0.3s ease, transform 0.3s ease;
+    display: flex; align-items: center; justify-content: center;
+}
+.back-to-top.visible {
+    bottom: 25px; /* Make visible */
+}
+.back-to-top:hover {
+    background-color: #d35445; transform: scale(1.1);
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 991px) { /* Mega menu breakpoint */
+    .mobile-toggle { display: block; }
+    #mega-menu-wrap-primary {
+        position: absolute; top: 100%; left: 0; width: 100%;
+        background-color: #fff; border-top: 1px solid #f0f0f0;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        max-height: 0; /* For transition */
+        overflow: hidden;
+        transition: max-height 0.5s ease-in-out;
+    }
+    #mega-menu-wrap-primary.mega-menu-open { /* Class added by JS */
+        max-height: 70vh; /* Adjust as needed, vh for viewport height */
+        overflow-y: auto;
+    }
+    #mega-menu-primary { flex-direction: column; width: 100%; }
+    #mega-menu-primary .mega-menu-item { width: 100%; }
+    #mega-menu-primary .mega-menu-link { border-bottom: 1px solid #f7f7f7; padding: 12px 20px; }
+    #mega-menu-primary .mega-sub-menu {
+        position: static; display: block; border: none; box-shadow: none;
+        padding-left: 20px; background-color: #fcfcfc;
+        opacity: 1; visibility: visible; transform: none; /* Override desktop dropdown */
+    }
+    .module.widget-handle.search-widget-handle.left.hidden-xs.hidden-sm { display: none; }
+    .front-page-heading { font-size: 2.4em; }
+    .front-page-heading-tagline { font-size: 1.3em; }
+}
+
+@media (max-width: 767px) {
+    .row { margin-left: 0; margin-right: 0; } /* Adjust row padding on small screens */
+    .col-md-3, .col-sm-6 { width: 100%; padding-left: 10px; padding-right: 10px;}
+    h1 { font-size: 2.2em; }
+    h2 { font-size: 1.8em; }
+    .sow-slider-image { min-height: 350px; }
+    .front-page-heading { font-size: 2em; }
+    .front-page-heading-tagline { font-size: 1.1em; }
+
+    .bx-wrapper .bx-controls-direction a { width: 38px; height: 38px; }
+    .bx-wrapper .bx-controls-direction a::before { font-size: 16px; }
+    .bx-wrapper .bx-prev { left: 10px; }
+    .bx-wrapper .bx-next { right: 10px; }
+    .bx-wrapper .bx-pager.bx-default-pager a { width: 10px; height: 10px; margin: 0 5px; }
+    .bx-wrapper .bx-pager { bottom: 10px; }
+
+    .gs_logo_area.slider1 { padding: 40px 0; }
+    .gs_logo_area .gs_logo_single { flex-basis: calc(50% - 15px); } /* Two logos per row */
+    .gs_logo_area h2.section-title { font-size: 1.8em; }
+    .gs_logo_area p.section-subtitle { font-size: 1em; margin-bottom: 30px; }
+
+    .footer-widget-area .col-md-3 { width: 100%; /* Stack footer widgets */ }
+    .site-info { text-align: center; }
+    #footer_quote_button { padding: 14px 25px; font-size: 0.9em; }
+}
+
+/* Utility classes */
+.mt20 { margin-top: 20px !important; }
+.pt0 { padding-top: 0 !important; }
+.mb-xs-24 { margin-bottom: 24px !important; }
+.text-right { text-align: right !important; }
+/* .hidden-xs, .hidden-sm can be handled with more media queries if needed */
